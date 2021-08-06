@@ -51,8 +51,7 @@ class PipeCustomOrdinalEncoder(BaseEstimator, TransformerMixin):
     """
 
     def __init__(self):
-        self.ord_encoder = OrdinalEncoder(
-            handle_unknown='use_encoded_value', unknown_value=1001)
+        self.ord_encoder = OrdinalEncoder()
 #         self.feature = feature_name
 
     def fit(self, X, y=None):
@@ -115,6 +114,7 @@ def transform_dataset(data):
 def main(input_filepath, output_filepath):
 
     df = pd.read_csv(input_filepath)
+    df = df.convert_dtypes()
 
     cat_columns = ['Self_Employed',
                    'Dependents',

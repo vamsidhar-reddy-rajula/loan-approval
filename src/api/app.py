@@ -2,7 +2,7 @@
 # from import PipeCustomOrdinalEncoder, transform_dataset, CustomKNNImputer, return_df
 import joblib
 import pandas as pd
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template, make_response
 from flask_restful import Api, Resource
 
 from sklearn.base import BaseEstimator, TransformerMixin
@@ -84,19 +84,37 @@ def transform_dataset(data):
     return data
 
 
-model = joblib.load(r'./models/1_base_model.sav')
+model = joblib.load(r'./models/1_base_changed_1001.sav')
 
 
 class classify_loan_applications(Resource):
     def get(self):
-        return "Welcome! Let's see if you have a good chance in getting your loan approved"
+        headers = {'Content-Type': 'text/html'}
+        return make_response(render_template('index.html'), 200, headers)
 
     def post(self):
-        json_data = request.get_json()
-        data = pd.DataFrame(json_data)
+        # json_data = request.get_json()
+        json_data = request.form.to_dict(flat=False)
+        data_types = {'Loan_ID': np.dtype('O'),
+                        'Gender': np.dtype('O'),
+                        'Married': np.dtype('O'),
+                        'Dependents': np.dtype('O'),
+                        'Education': np.dtype('O'),
+                        'Self_Employed': np.dtype('O'),
+                        'ApplicantIncome': np.dtype('float64'),
+                        'CoapplicantIncome': np.dtype('float64'),
+                        'LoanAmount': np.dtype('float64'),
+                        'Loan_Amount_Term': np.dtype('float64'),
+                        'Credit_History': np.dtype('float64'),
+                        'Property_Area': np.dtype('O')}
+        json_data = {k: v[0] for k, v in json_data.items()}
+        json_data["Loan_ID"] = 0
+        data = pd.DataFrame(json_data, index=[0])
+        print(data.columns)
+        data = data.astype(data_types)
         prediction = model.predict(data)
         pred = {}
-        pred['predictions'] = prediction.tolist()
+        pred['predictions'] = np.where(prediction==0,"Rejected","Approved").tolist()
         return jsonify(pred)
 
 
