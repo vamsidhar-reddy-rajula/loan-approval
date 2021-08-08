@@ -2,73 +2,219 @@
 <html lang="en" dir="ltr">
 
 <head>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"> -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='styles/main.css')}}">
+
     <meta charset="utf-8">
     <title>Loan Classifier | Check the probability of your application approval</title>
 </head>
 
 <body>
-    <form action="http://127.0.0.1:5000/" method="POST">
-        <label class="label" for="Gender">Gender</label>
-        <select id="Gender" name="Gender">
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-        </select><br>
-        <label class="label" for="Married">Married</label>
-        <select id="Married" name="Married">
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-        </select><br>
-        <label class="label" for="Dependents">Dependents</label>
-        <select id="Dependents" name="Dependents">
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3+">3+</option>
-        </select><br>
-        <label class="label" for="Education">Education</label>
-        <select id="Education" name="Education">
-            <option value="Graduate">Graduate</option>
-            <option value="Not Graduate">Not Graduate</option>
-        </select><br>
-        <label class="label" for="Self_Employed">Self Employed</label>
-        <select id="Self_Employed" name="Self_Employed">
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-        </select><br>
-        <label for="ApplicantIncome" class="label">Income</label>
-        <input type="text" id="ApplicantIncome" name="ApplicantIncome"><br>
-        <label for="LoanAmount" class="label">Loan Amount</label>
-        <input type="text" id="LoanAmount" name="LoanAmount"><br>
-        <label class="label" for="Loan_Amount_Term">Loan Term</label>
-        <select id="Loan_Amount_Term" name="Loan_Amount_Term">
-            <option value="12">12</option>
-            <option value="36">36</option>
-            <option value="60">60</option>
-            <option value="84">84</option>
-            <option value="120">120</option>
-            <option value="180">180</option>
-            <option value="240">240</option>
-            <option value="300">300</option>
-            <option value="360">360</option>
-            <option value="480">480</option>
-        </select><br>
-        <label class="label" for="Credit_History">Credit History</label>
-        <select id="Credit_History" name="Credit_History">
-            <option value="1.">Good credit history</option>
-            <option value="0.">Very bad</option>
-        </select><br>
-        <label class="label" for="Property_Area">Location Type</label>
-        <select id="Property_Area" name="Property_Area">
-            <option value="Rural">Rural</option>
-            <option value="Semiurban">Semiurban</option>
-            <option value="Urban">Urban</option>
-        </select><br>
-        <label for="CoapplicantIncome">CoApplicant Income</label>
-        <input type="text" id="CoapplicantIncome" name="CoapplicantIncome"><br>
-        <input type="submit" value="submit">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-6">
+                <form action="http://127.0.0.1:5000/" method="POST">
+
+                    <div class="row g-3 mb-3 align-items-center">
+                        <div class="col-auto">
+                            <label for="Gender" class="col-form-label">Gender</label>
+                        </div>
+                        <div class="col-auto">
+                            <select id="Gender" name="Gender" class="form-select-sm">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+                        <!-- <div class="col-auto">
+                            <span id="passwordHelpInline" class="form-text">
+                                Must be 8-20 characters long.
+                            </span>
+                        </div> -->
+                    </div>
+
+                    <div class="row g-3 mb-3 align-items-center">
+                        <div class="col-auto">
+                            <label for="Married" class="col-form-label">Married</label>
+                        </div>
+                        <div class="col-auto">
+                            <select id="Married" name="Married" class="form-select-sm">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <!-- <div class="col-auto">
+                            <span id="passwordHelpInline" class="form-text">
+                                Must be 8-20 characters long.
+                            </span>
+                        </div> -->
+                    </div>
+
+                    <div class="row g-3 mb-3 align-items-center">
+                        <div class="col-auto">
+                            <label for="Dependents" class="col-form-label">Dependents</label>
+                        </div>
+                        <div class="col-auto">
+                            <select id="Dependents" name="Dependents" class="form-select-sm">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3+">3+</option>
+                            </select>
+                        </div>
+                        <!-- <div class="col-auto">
+                            <span id="passwordHelpInline" class="form-text">
+                                Must be 8-20 characters long.
+                            </span>
+                        </div> -->
+                    </div>
+
+                    <div class="row g-3 mb-3 align-items-center">
+                        <div class="col-auto">
+                            <label for="Education" class="col-form-label">Education</label>
+                        </div>
+                        <div class="col-auto">
+                            <select id="Education" name="Education" class="form-select-sm">
+                                <option value="Graduate">Graduate</option>
+                                <option value="Not Graduate">Not Graduate</option>
+                            </select>
+                        </div>
+                        <!-- <div class="col-auto">
+                            <span id="passwordHelpInline" class="form-text">
+                                Must be 8-20 characters long.
+                            </span>
+                        </div> -->
+                    </div>
+                    <div class="row g-3 mb-3 align-items-center">
+                        <div class="col-auto">
+                            <label for="Self_Employed" class="col-form-label">Self Employed</label>
+                        </div>
+                        <div class="col-auto">
+                            <select id="Self_Employed" name="Self_Employed" class="form-select-sm">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <!-- <div class="col-auto">
+                            <span id="passwordHelpInline" class="form-text">
+                                Must be 8-20 characters long.
+                            </span>
+                        </div> -->
+                    </div>
 
 
-    </form>
+                    <div class="row g-3 mb-3 align-items-center">
+                        <div class="col-auto">
+                            <label for="ApplicantIncome" class="col-form-label">Income</label>
+                        </div>
+                        <div class="col-auto">
+                            <input type="text" id="ApplicantIncome" name="ApplicantIncome" class="form-control">
+                        </div>
+                        <!-- <div class="col-auto">
+                            <span id="passwordHelpInline" class="form-text">
+                                Must be 8-20 characters long.
+                            </span>
+                        </div> -->
+                    </div>
+
+                    <div class="row g-3 mb-3 align-items-center">
+                        <div class="col-auto">
+                            <label for="LoanAmount" class="col-form-label">Loan Amount</label>
+                        </div>
+                        <div class="col-auto">
+                            <input type="text" id="LoanAmount" name="LoanAmount" class="form-control">
+                        </div>
+                        <!-- <div class="col-auto">
+                            <span id="passwordHelpInline" class="form-text">
+                                Must be 8-20 characters long.
+                            </span>
+                        </div> -->
+                    </div>
+
+
+                    <div class="row g-3 mb-3 align-items-center">
+                        <div class="col-auto">
+                            <label for="Loan_Amount_Term" class="col-form-label">Loan Term</label>
+                        </div>
+                        <div class="col-auto">
+                            <select id="Loan_Amount_Term" name="Loan_Amount_Term" class="form-select-sm">
+                                <option value="12">12</option>
+                                <option value="36">36</option>
+                                <option value="60">60</option>
+                                <option value="84">84</option>
+                                <option value="120">120</option>
+                                <option value="180">180</option>
+                                <option value="240">240</option>
+                                <option value="300">300</option>
+                                <option value="360">360</option>
+                                <option value="480">480</option>
+                            </select>
+                        </div>
+                        <!-- <div class="col-auto">
+                            <span id="passwordHelpInline" class="form-text">
+                                Must be 8-20 characters long.
+                            </span>
+                        </div> -->
+                    </div>
+
+
+
+                    <div class="row g-3 mb-3 align-items-center">
+                        <div class="col-auto">
+                            <label for="Credit_History" class="col-form-label">Credit History</label>
+                        </div>
+                        <div class="col-auto">
+                            <select id="Credit_History" name="Credit_History" class="form-select-sm">
+                                <option value="1.">Good credit history</option>
+                                <option value="0.">Very bad</option>
+                            </select>
+                        </div>
+                        <!-- <div class="col-auto">
+                            <span id="passwordHelpInline" class="form-text">
+                                Must be 8-20 characters long.
+                            </span>
+                        </div> -->
+                    </div>
+
+                    <div class="row g-3 mb-3 align-items-center">
+                        <div class="col-auto">
+                            <label for="Property_Area" class="col-form-label">Location Type</label>
+                        </div>
+                        <div class="col-auto">
+                            <select id="Property_Area" name="Property_Area" class="form-select-sm">
+                                <option value="Rural">Rural</option>
+                                <option value="Semiurban">Semiurban</option>
+                                <option value="Urban">Urban</option>
+                            </select>
+                        </div>
+                        <!-- <div class="col-auto">
+                            <span id="passwordHelpInline" class="form-text">
+                                Must be 8-20 characters long.
+                            </span>
+                        </div> -->
+                    </div>
+
+                    <div class="row g-3 mb-3 align-items-center">
+                        <div class="col-auto">
+                            <label for="CoapplicantIncome" class="col-form-label">CoApplicant Income</label>
+                        </div>
+                        <div class="col-auto">
+                            <input type="text" id="CoapplicantIncome" name="CoapplicantIncome" class="form-control">
+                        </div>
+                        <!-- <div class="col-auto">
+                            <span id="passwordHelpInline" class="form-text">
+                                Must be 8-20 characters long.
+                            </span>
+                        </div> -->
+                    </div>
+                    <input type="submit" value="submit">
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
