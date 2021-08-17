@@ -1,6 +1,10 @@
 Loan Approval
 ==============================
 
+# Deployed Model
+
+http://ec2-18-118-5-149.us-east-2.compute.amazonaws.com:5000/
+
 Predict whether a loan will be approved or not
 
 Project Organization
